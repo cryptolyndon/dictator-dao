@@ -100,6 +100,8 @@ module.exports = {
     addr,
     createFixture,
     keccak256,
+    toUtf8Bytes,
     abiCoder: defaultAbiCoder,
+    solidityPack,
     incTime,
 }

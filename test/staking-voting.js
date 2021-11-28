@@ -228,8 +228,10 @@ describe("Staking and Voting", function () {
             // get 20% more shares back:
             await this.token.connect(this.carol).transfer(this.dao.address, tribute)
 
-            // Alice now gets 1/5 more back:
-            await expect(this.dao.connect(this.alice).burn(this.alice.address, stakeAlice))
+            // Alice now gets 1/5 more back. (Using "burnFrom" mainly for coverage
+            // reasons):
+            await this.dao.connect(this.alice).approve(this.erin.address, UINT256_MAX)
+            await expect(this.dao.connect(this.erin).burnFrom(this.alice.address, this.alice.address, stakeAlice))
                 .to.emit(this.dao, "Transfer")
                 .withArgs(this.alice.address, ZERO_ADDR, stakeAlice)
                 .to.emit(this.token, "Transfer")
