@@ -668,7 +668,7 @@ contract DictatorToken is ERC20, BoringBatchable {
         // Interactions
         if (_pendingTokens != 0) {
             balanceOf[address(this)] = balanceOf[address(this)].sub(_pendingTokens);
-            balanceOf[to] += balanceOf[to];
+            balanceOf[to] += _pendingTokens;
             emit Transfer(address(this), to, _pendingTokens);
         }
 
@@ -700,7 +700,7 @@ contract DictatorToken is ERC20, BoringBatchable {
 
         // Interactions
         balanceOf[address(this)] = balanceOf[address(this)].sub(_pendingTokens);
-        balanceOf[to] += balanceOf[to];
+        balanceOf[to] += _pendingTokens;
         emit Transfer(address(this), to, _pendingTokens);
 
         IRewarder _rewarder = rewarder[pid];
